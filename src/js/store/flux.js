@@ -1,42 +1,57 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			list: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+			listGet: () => {
+				let requestOptions = {
+					method: "GET",
+					redirect: "follow"
+				};
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+				fetch(`https://assets.breatheco.de/apis/fake/todos/user/cgarzon`, requestOptions)
+					.then(response => response.json())
+					.then(res => getStore(setStore({ list: res })))
+					.catch(error => console.log("error", error));
+			},
+			newListItem: newItem => {
+				const myHeaders = { "Content-Type": "application/json" };
+				let newList = getStore().list;
+				newList = [...newList, { label: newItem, done: false }];
+				const raw = JSON.stringify(newList);
 
-				//reset the global store
-				setStore({ demo: demo });
+				const requestOptions = {
+					method: "PUT",
+					headers: myHeaders,
+					body: raw,
+					redirect: "follow"
+				};
+
+				fetch("https://assets.breatheco.de/apis/fake/todos/user/cgarzon", requestOptions)
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.then(() => getActions().listGet())
+					.catch(error => console.log("error", error));
+			},
+
+			deleteListItem: () => {
+				const myHeaders = { "Content-Type": "application/json" };
+				let newList = getStore().list;
+				const raw = JSON.stringify(newList);
+				newList = [...newList];
+				const requestOptions = {
+					method: "PUT",
+					headers: myHeaders,
+					body: raw,
+					redirect: "follow"
+				};
+
+				fetch("https://assets.breatheco.de/apis/fake/todos/user/cgarzon", requestOptions)
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.then(res => getStore(setStore({ list: res })))
+					.catch(error => console.log("error", error));
 			}
 		}
 	};

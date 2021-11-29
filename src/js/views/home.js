@@ -1,15 +1,40 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.scss";
+import { Context } from "../store/appContext";
+import getState from "../store/flux";
 
-export const Home = () => (
-	<div className="text-center mt-5">
-		<h1>Hello Rigo!</h1>
-		<p>
-			<img src={rigoImage} />
-		</p>
-		<a href="#" className="btn btn-success">
-			If you see this green button, bootstrap is working
-		</a>
-	</div>
-);
+export const Home = () => {
+	const { store, actions } = useContext(Context);
+	const [newItem, setNewItem] = useState("");
+
+	return (
+		<div className="text-center mt-5">
+			<input type="text" placeholder="New Task" value={newItem} onChange={e => setNewItem(e.target.value)} />
+			<button
+				className="btn-primary "
+				type="button"
+				onClick={() => {
+					actions.newListItem(newItem);
+					setNewItem("");
+				}}>
+				Add
+			</button>
+			<div>
+				<ul>
+					{store.list &&
+						store.list.map((item, index) => {
+							return (
+								<li key={index}>
+									{item.label}
+									<button onClick={() => {}} type="button">
+										X
+									</button>
+								</li>
+							);
+						})}
+				</ul>
+			</div>
+		</div>
+	);
+};
