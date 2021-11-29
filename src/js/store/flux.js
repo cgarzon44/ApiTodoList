@@ -35,13 +35,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log("error", error));
 			},
 
-			deleteListItem: index => {
-				let requestOptions = {
-					method: "DELETE",
+			deleteItem: () => {
+				const myHeaders = { "Content-Type": "application/json" };
+				let newList = getStore().list;
+				newList = [...newList];
+				const raw = JSON.stringify(newList);
+
+				const requestOptions = {
+					method: "PUT",
+					headers: myHeaders,
+					body: raw,
 					redirect: "follow"
 				};
-				return fetch("https://assets.breatheco.de/apis/fake/todos/user/cgarzon", requestOptions)
-					.then(response => response.json())
+
+				fetch("https://assets.breatheco.de/apis/fake/todos/user/cgarzon", requestOptions)
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.then(() => getActions().listGet())
 					.catch(error => console.log("error", error));
 			}
 		}
