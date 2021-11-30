@@ -6,12 +6,6 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [newItem, setNewItem] = useState("");
 
-	function deleteCurrentItem(i, index) {
-		const newList = store.list.filter((i, index) => {
-			return index !== i;
-		});
-	}
-
 	return (
 		<div className="text-center mt-5">
 			<input type="text" placeholder="New Task" value={newItem} onChange={e => setNewItem(e.target.value)} />
@@ -32,10 +26,9 @@ export const Home = () => {
 								<li key={index}>
 									{item.label}
 									<button
-										onChange={deleteCurrentItem}
 										type="button"
 										onClick={() => {
-											actions.deleteItem();
+											actions.deleteItem(index);
 										}}>
 										<i className="far fa-trash-alt" />
 									</button>

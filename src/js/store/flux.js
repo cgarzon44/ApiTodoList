@@ -29,16 +29,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				fetch("https://assets.breatheco.de/apis/fake/todos/user/cgarzon", requestOptions)
-					.then(response => response.text())
+					.then(response => response.json())
 					.then(result => console.log(result))
 					.then(() => getActions().listGet())
 					.catch(error => console.log("error", error));
 			},
 
-			deleteItem: () => {
+			deleteItem: index => {
 				const myHeaders = { "Content-Type": "application/json" };
 				let newList = getStore().list;
-				newList = [...newList];
+
+				const ifIndexMatchRemove = (element, indexToTest) => {
+					return indexToTest !== index;
+				};
+				newList = getStore().list.filter(ifIndexMatchRemove);
 				const raw = JSON.stringify(newList);
 
 				const requestOptions = {
@@ -48,10 +52,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
+				const newObject = { list: newList };
 				fetch("https://assets.breatheco.de/apis/fake/todos/user/cgarzon", requestOptions)
-					.then(response => response.text())
+					.then(response => response.json())
 					.then(result => console.log(result))
-					.then(() => getActions().listGet())
+
+					.then(response => setStore(newObject))
+
 					.catch(error => console.log("error", error));
 			}
 		}
