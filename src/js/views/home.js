@@ -8,6 +8,8 @@ export const Home = () => {
 	const [newItem, setNewItem] = useState("");
 	const [isShownHoverContent, setIsShownHoverContent] = useState(null);
 
+	var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+
 	return (
 		<>
 			<div className="text-center mt-5">
