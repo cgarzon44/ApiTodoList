@@ -47,6 +47,13 @@ export const Home = () => {
 							})}
 					</ul>
 				</div>
+				<button
+					type="button"
+					onClick={() => {
+						actions.returnNewArray();
+					}}>
+					delete list
+				</button>
 			</div>
 		</>
 	);

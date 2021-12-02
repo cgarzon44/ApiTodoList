@@ -60,6 +60,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => setStore(newObject))
 
 					.catch(error => console.log("error", error));
+			},
+
+			returnNewArray: () => {
+				const myHeaders = { "Content-Type": "application/json" };
+
+				const raw = JSON.stringify([
+					{
+						label: "Sample Task",
+						done: false
+					}
+				]);
+
+				const requestOptions = {
+					method: "PUT",
+					headers: myHeaders,
+					body: raw,
+					redirect: "follow"
+				};
+
+				fetch("https://assets.breatheco.de/apis/fake/todos/user/cgarzon", requestOptions)
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.then(() => getActions().listGet())
+					.catch(error => console.log("error", error));
 			}
 		}
 	};
