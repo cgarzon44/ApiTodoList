@@ -7,3 +7,55 @@
 
     width: 60%;
 }
+
+
+
+.complete{
+    text-decoration: line-through;
+    opacity:0.4;
+}
+
+.hide{
+    display:none;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    border-bottom-width: 1px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0.625rem;
+    height: 3.5rem;
+    background-color: #fff
+}
+
+.custom-container{
+    width:90%;
+    margin:auto;
+}
+
+#app{
+    width:75%;
+    margin:auto;
+    
+    margin-top: 100px;
+    
+}
+
+ul {
+    list-style-type: none; 
+    padding: 0;
+    margin: 0; 
+  }
+
+  .fa-times{
+      color:red;
+      margin:auto;
+      
+  
+  }
+
+  .counter{
+      text-align:center;
+  }

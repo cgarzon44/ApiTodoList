@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import "../../styles/home.scss";
 import { Context } from "../store/appContext";
+import ToDoCounter from "./TodoCounter";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [newItem, setNewItem] = useState("");
+	const [isShownHoverContent, setIsShownHoverContent] = useState(null);
 
 	return (
 		<>
@@ -28,20 +30,30 @@ export const Home = () => {
 					}}>
 					Add
 				</button>
+
+				<ToDoCounter />
 				<div>
 					<ul>
 						{store.list &&
 							store.list.map((item, index) => {
 								return (
-									<li key={index}>
+									<li
+										key={index}
+										onMouseEnter={() => setIsShownHoverContent(item.id)}
+										onMouseLeave={() => setIsShownHoverContent(null)}>
 										{item.label}
-										<button
-											type="button"
-											onClick={() => {
-												actions.deleteItem(index);
-											}}>
-											<i className="far fa-trash-alt" />
-										</button>
+										<div>
+											<i
+												onClick={() => {
+													actions.deleteItem(index);
+												}}
+												className={
+													isShownHoverContent === item.id
+														? "fas fa-times p-2 flex-shrink-1 "
+														: "fas fa-times p-2 flex-shrink-1 hide"
+												}
+											/>
+										</div>
 									</li>
 								);
 							})}
@@ -52,7 +64,7 @@ export const Home = () => {
 					onClick={() => {
 						actions.returnNewArray();
 					}}>
-					delete list
+					Delete list
 				</button>
 			</div>
 		</>
