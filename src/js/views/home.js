@@ -39,9 +39,10 @@ export const Home = () => {
 								return (
 									<li key={index}>
 										<div
+											className="listItemDiv"
 											onMouseEnter={() => setIsShownHoverContent(index)}
 											onMouseLeave={() => setIsShownHoverContent(-1)}>
-											{item.label}
+											<h1> {item.label}</h1>
 											<div
 												onClick={() => {
 													actions.deleteItem(index);
