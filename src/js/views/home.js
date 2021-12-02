@@ -12,7 +12,13 @@ export const Home = () => {
 				<img src="https://media.istockphoto.com/vectors/colorful-typography-banner-vector-id1282301744?k=20&m=1282301744&s=612x612&w=0&h=B8PNgvmH4OY88dlfl3OsIQtOfTwMELqqPEyUWxRA74c=" />
 			</div>
 			<div className="text-center mt-5">
-				<input type="text" placeholder="New Task" value={newItem} onChange={e => setNewItem(e.target.value)} />
+				<input
+					className="TodoInput"
+					type="text"
+					placeholder="New Task"
+					value={newItem}
+					onChange={e => setNewItem(e.target.value)}
+				/>
 				<button
 					className="btn-primary "
 					type="button"
