@@ -35,24 +35,26 @@ export const Home = () => {
 				<div>
 					<ul>
 						{store.list &&
-							store.list.map((item, index) => {
+							store.list.map((item, index, i) => {
 								return (
-									<li
-										key={index}
-										onMouseEnter={() => setIsShownHoverContent(item.id)}
-										onMouseLeave={() => setIsShownHoverContent(null)}>
-										{item.label}
-										<div>
-											<i
+									<li key={index}>
+										<div
+											key={i}
+											onMouseEnter={() => setIsShownHoverContent(i)}
+											onMouseLeave={() => setIsShownHoverContent(null)}>
+											{item.label}
+											<div
 												onClick={() => {
 													actions.deleteItem(index);
-												}}
-												className={
-													isShownHoverContent === item.id
-														? "fas fa-times p-2 flex-shrink-1 "
-														: "fas fa-times p-2 flex-shrink-1 hide"
-												}
-											/>
+												}}>
+												<i
+													className={
+														isShownHoverContent === i
+															? "fas fa-times p-2 flex-shrink-1 "
+															: "fas fa-times p-2 flex-shrink-1 hide"
+													}
+												/>
+											</div>
 										</div>
 									</li>
 								);
