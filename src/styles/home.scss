@@ -1,22 +1,20 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300&display=swap');
 
 
 // *{
-//     border: 1px dashed red;
+//   border: dashed 1px lightgray;
 // }
-
 
 
 .TodoInput{
 
     background-color:white;
     color: black;
-    border: 2px solid red;
-    border-radius: 4px;
-
-    width: 60%;
+    border: 2px solid yellowgreen;
+    border-radius: 10px;
+margin: 30px;
+    width: 25%;
 }
 
 
@@ -44,20 +42,47 @@ ul {
 
   .listItemDiv{
       display: inline-flex;
+      border-bottom: solid 1px lightgray;
     
   }
 
-  h1{
-    font-family: 'Courgette', cursive;
+  h3{
+    font-family: 'Tajawal', sans-serif;
     margin: 15px;
+    width: 500px;
     
   }
 
   button {
     transition-duration: 0.4s;
+    border-radius: 10px;
+    width: 100px;
+    margin:7px;
+   
+  
   }
   
   button:hover {
-    background-color: red; /* Green */
+    background-color:red;/* Green */
     color: white;
+  }
+
+  .deleteListButton{
+      background-color: white;
+      color:red
+  }
+
+  .deleteListButtonDiv{
+    background-color:#fff;
+    font:bold 14px;
+    color:#1E88E5;
+    width:100%;
+    height:auto;
+    padding:1%;
+    border-top:1px solid #1E88E5;
+    margin: 15px;
+  }
+
+  .project{
+    display: inline-flex;
   }

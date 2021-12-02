@@ -1,10 +1,20 @@
-import React, { Component } from "react";
+import React, { useContext, useState } from "react";
+import "../../styles/home.scss";
+import { Context } from "../store/appContext";
 
-export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center">
-		<p>
-			Made with <i className="fa fa-heart text-danger" /> by{" "}
-			<a href="http://www.4geeksacademy.com">4Geeks Academy</a>
-		</p>
-	</footer>
-);
+export const Footer = () => {
+	const { actions } = useContext(Context);
+
+	return (
+		<>
+			<button
+				className="deleteListButton"
+				type="button"
+				onClick={() => {
+					actions.returnNewArray();
+				}}>
+				Delete List
+			</button>
+		</>
+	);
+};

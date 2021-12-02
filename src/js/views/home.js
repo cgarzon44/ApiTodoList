@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import "../../styles/home.scss";
 import { Context } from "../store/appContext";
 import ToDoCounter from "./TodoCounter";
+import { Footer } from "../component/footer";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -13,16 +14,16 @@ export const Home = () => {
 	return (
 		<>
 			<div className="text-center mt-5">
-				<img src="https://media.istockphoto.com/vectors/colorful-typography-banner-vector-id1282301744?k=20&m=1282301744&s=612x612&w=0&h=B8PNgvmH4OY88dlfl3OsIQtOfTwMELqqPEyUWxRA74c=" />
-			</div>
-			<div className="text-center mt-5">
+				<div className="text-center mt-5">
+					<img src="https://media.istockphoto.com/vectors/colorful-typography-banner-vector-id1282301744?k=20&m=1282301744&s=612x612&w=0&h=B8PNgvmH4OY88dlfl3OsIQtOfTwMELqqPEyUWxRA74c=" />
+				</div>
 				<input
 					className="TodoInput"
 					type="text"
 					placeholder="New Task"
 					value={newItem}
 					onChange={e => setNewItem(e.target.value)}
-				/>
+				/>{" "}
 				<button
 					className="btn-primary "
 					type="button"
@@ -31,9 +32,18 @@ export const Home = () => {
 						setNewItem("");
 					}}>
 					Add
+				</button>{" "}
+				<button
+					className="deleteListButton"
+					type="button"
+					onClick={() => {
+						actions.returnNewArray();
+					}}>
+					Delete List
 				</button>
-
-				<ToDoCounter />
+				<div>
+					<ToDoCounter />
+				</div>
 				<div>
 					<ul>
 						{store.list &&
@@ -44,7 +54,7 @@ export const Home = () => {
 											className="listItemDiv"
 											onMouseEnter={() => setIsShownHoverContent(index)}
 											onMouseLeave={() => setIsShownHoverContent(-1)}>
-											<h1> {item.label}</h1>
+											<h3> {item.label}</h3>
 											<div
 												onClick={() => {
 													actions.deleteItem(index);
@@ -63,13 +73,6 @@ export const Home = () => {
 							})}
 					</ul>
 				</div>
-				<button
-					type="button"
-					onClick={() => {
-						actions.returnNewArray();
-					}}>
-					Delete list
-				</button>
 			</div>
 		</>
 	);
