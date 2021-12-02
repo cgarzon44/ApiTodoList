@@ -35,13 +35,12 @@ export const Home = () => {
 				<div>
 					<ul>
 						{store.list &&
-							store.list.map((item, index, i) => {
+							store.list.map((item, index) => {
 								return (
 									<li key={index}>
 										<div
-											key={i}
-											onMouseEnter={() => setIsShownHoverContent(i)}
-											onMouseLeave={() => setIsShownHoverContent(null)}>
+											onMouseEnter={() => setIsShownHoverContent(index)}
+											onMouseLeave={() => setIsShownHoverContent(-1)}>
 											{item.label}
 											<div
 												onClick={() => {
@@ -49,7 +48,7 @@ export const Home = () => {
 												}}>
 												<i
 													className={
-														isShownHoverContent === i
+														isShownHoverContent === index
 															? "fas fa-times p-2 flex-shrink-1 "
 															: "fas fa-times p-2 flex-shrink-1 hide"
 													}
