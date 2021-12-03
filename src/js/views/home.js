@@ -9,8 +9,6 @@ export const Home = () => {
 	const [newItem, setNewItem] = useState("");
 	const [isShownHoverContent, setIsShownHoverContent] = useState(null);
 
-	
-
 	return (
 		<>
 			<div className="text-center mt-5">
@@ -23,7 +21,7 @@ export const Home = () => {
 					placeholder="New Task"
 					value={newItem}
 					onChange={e => setNewItem(e.target.value)}
-				/>{" "}
+				/>
 				<button
 					className="btn-primary "
 					type="button"
@@ -32,7 +30,7 @@ export const Home = () => {
 						setNewItem("");
 					}}>
 					Add
-				</button>{" "}
+				</button>
 				<button
 					className="deleteListButton"
 					type="button"
@@ -48,28 +46,31 @@ export const Home = () => {
 					<ul>
 						{store.list &&
 							store.list.map((item, index) => {
-								return (
-									<li key={index}>
-										<div
-											className="listItemDiv"
-											onMouseEnter={() => setIsShownHoverContent(index)}
-											onMouseLeave={() => setIsShownHoverContent(-1)}>
-											<h3> {item.label}</h3>
+								if (index == 0) {
+									return "";
+								} else
+									return (
+										<li key={index}>
 											<div
-												onClick={() => {
-													actions.deleteItem(index);
-												}}>
-												<i
-													className={
-														isShownHoverContent === index
-															? "fas fa-times p-2 flex-shrink-1 "
-															: "fas fa-times p-2 flex-shrink-1 hide"
-													}
-												/>
+												className="listItemDiv"
+												onMouseEnter={() => setIsShownHoverContent(index)}
+												onMouseLeave={() => setIsShownHoverContent(-1)}>
+												<h3> {item.label}</h3>
+												<div
+													onClick={() => {
+														actions.deleteItem(index);
+													}}>
+													<i
+														className={
+															isShownHoverContent === index
+																? "fas fa-times p-2 flex-shrink-1 "
+																: "fas fa-times p-2 flex-shrink-1 hide"
+														}
+													/>
+												</div>
 											</div>
-										</div>
-									</li>
-								);
+										</li>
+									);
 							})}
 					</ul>
 				</div>
